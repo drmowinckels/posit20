@@ -22,3 +22,6 @@ editor: visual
 `here` for inside your project
 `fs` for outside - check your pkgs, and the fs deps for incorporation
 
+## personal R admin
+- [david's slides](https://rstats-wtf.github.io/wtf-personal-radmin-slides/#/renviron)
+
