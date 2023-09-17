@@ -1,0 +1,24 @@
+---
+title: "WTF workshop"
+date: 2023-09-17
+format: html
+editor: visual
+---
+
+## Materials
+
+-   [repo](https://github.com/posit-conf-2023/wtf)
+
+-   [book](https://rstats.wtf/)
+
+-   [Isabella's post on the pipe](https://ivelasq.rbind.io/blog/understanding-the-r-pipe/)
+
+
+## Settings for best practice R
+
+-   `usethis::use_blank_slate()`
+
+## safe paths
+`here` for inside your project
+`fs` for outside - check your pkgs, and the fs deps for incorporation
+
