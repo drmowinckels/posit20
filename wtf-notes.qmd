@@ -25,3 +25,7 @@ editor: visual
 ## personal R admin
 - [david's slides](https://rstats-wtf.github.io/wtf-personal-radmin-slides/#/renviron)
 
+```{r}
+library(dplyr)
+```
+
