@@ -1,0 +1,82 @@
+---
+title: "Package dev Masterclass"
+date: 2023-09-18
+format: html
+editor: visual
+---
+
+## Materials
+
+-   [repo](https://github.com/posit-conf-2023/pkg-dev-masterclass)
+
+-   [tidy design pronciples](https://design.tidyverse.org/)
+
+## function spec
+
+the arguments, how do you make them as informative as possible.
+
+So the user get an idea how to use the function.
+
+factor ordering depends on language locale of computer! Didn't know that!
+
+`missing()`\` actually let us know if the function was given user input or if it is using the default value (if it has one).
+
+optional args should have defaults, required should not.
+
+`…`\` goes after the required arguments, before the optional arguments.
+
+-   forces users to name the optional arguments when using them.
+
+optional arguments with computation that is non-trivial, let default be `NULL` and do an `if(is.null())`\` in the function it self.
+
+maybe make a helper function for your self to get env variables, rather than sys, and then be able to use `is.null`\`, because your helper will return NULL if the variable does not exist. like `get_env`\` rather than `Sys.getenv`\`
+
+match.arg is great, if you are already importing rlang, then use arg_match which does not do partial matching.
+
+## testing
+
+`usethis::use_testthat(3)`\` to opt into the new 3rd edition testthat.
+
+[{waldo} package.](https://www.tidyverse.org/blog/2020/10/waldo/)
+
+use the 3rd edition, also makes it possible to [parallelise](https://testthat.r-lib.org/articles/parallel.html) Which will be run in parallell, one per file.
+
+have a test file - r file matching 1:1. so that its easy to know which file is testing what.\
+
+### snapshot tests
+
+use them a little as possible, because they will always require human intervention.\
+Great for tests that making explicit expectations can be very hard to articulate, and at the end of the day a human anyway needs to decide if this is a problem or not.\
+\
+
+### errors
+
+cli abort parent.frame() for error calls inside helper functions so that when it is erroring that the error does not look like its coming from the helper, which is not informative for the user.
+
+### type checking
+
+standalone rlang feature.
+
+## Advanced topics
+
+`withCallingHandlers`\` captures more complicated things for good error messages.
+
+custom object errors. returning errors like objects, like httr2 does. Where there is more context etc that needs to be relayed.
+
+## Improving test quality
+
+tests dont have to be very DRY. Obvious \>\>\> DRY
+
+use the helper files when appropriate
+
+when you need to change options etc in tests, use `withr`\` to help deal with that, which will make sure that the changes are local and will not persist.
+
+use especially with local file stuff. Make sure to check ggsegExtra for these things!
+
+you can have multiple setup and helper files, they just need their respecitve prefixes
+
+dont mess with the testthat.R file. its only ever run by R CMD CHECK
+
+## Mocking
+
+`testthat::local_mocked_binding`\` helps you "overwrite" a function temporarily, so that you can bypass it and check the remaining function.
